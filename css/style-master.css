@@ -120,10 +120,16 @@ main{
 }
 
 .black-block{
+    transform: translateY(20%);
+    transition: all 0.5s ease;
     position: absolute;
     bottom: 0px;
     height: 55%;
     width: 25%;
     background-color: black;
     opacity: 0.5;
+}
+
+.black-block:hover{
+    transform: translateY(0);
 }
