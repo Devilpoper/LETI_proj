@@ -1,0 +1,101 @@
+main{
+    position: relative;
+}
+
+@keyframes show {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.main-img-wrapper{
+    background-image: url("../img/home/main-background.png");
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 54.2%;
+    z-index: 0;
+}
+
+.ripped-paper{
+    width: 100%;
+}
+
+.main-cover-img-wrapper{
+    max-width: 100%;
+}
+
+.main-content{
+    position: relative;
+    z-index: 1;
+    margin-top: -12%;
+    max-width: 100%;
+}
+
+.main-content-text{
+    position: relative;
+    z-index: 1;
+    background-color: #E7E3C4;
+    margin-top: -1%;
+    height: 200px;
+}
+
+.flexbox-wrapper {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.column1, .column2, .column3, .column4{
+    opacity: 0;
+    transition: all 0.5s ease;
+    width: 25%;
+}
+
+.column1:hover, .column2:hover, .column3:hover, .column4:hover{
+    opacity: 1;
+}
+
+.column1{
+    background-image: url("../img/home/column1.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.column2{
+    background-image: url("../img/home/column2.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.column3{
+    background-image: url("../img/home/column3.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.column4{
+    background-image: url("../img/home/column4.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.black-block{
+    transform: translateY(20%);
+    transition: all 0.5s ease;
+    position: absolute;
+    bottom: 0px;
+    height: 55%;
+    width: 25%;
+    background-color: black;
+    opacity: 0.5;
+}
+
+.black-block:hover{
+    transform: translateY(0);
+}
+

@@ -1,0 +1,23 @@
+@import "../base/reset.css";
+@import "../base/fonts.css";
+@import "../layouts/utils.css";
+@import "../components/buttons.css";
+@import "../components/modal.css";
+@import "common.css";
+
+
+.collage__item:nth-child(1) {
+    grid-area: 1 / 1 / 3 / 4;
+}
+.collage__item:nth-child(2) {
+    grid-area: 1 / 4 / 3 / 5;
+}
+.collage__item:nth-child(3) {
+    grid-area: 1 / 5 / 5 / 7;
+}
+.collage__item:nth-child(4) {
+    grid-area: 3 / 1 / 5 / 2;
+}
+.collage__item:nth-child(5) {
+    grid-area: 3 / 2 / 5 / 5;
+}
