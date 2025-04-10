@@ -63,6 +63,7 @@ li a{color: inherit;}
 
 main{
     position: relative;
+    
 }
 
 @keyframes show {
@@ -71,6 +72,7 @@ main{
   }
 
 .main-img-wrapper{
+    margin-top: 66px;
     background-image: url("../img/main-background.png");
     background-position: center; /* Центрируем изображение */
     background-size: cover;
@@ -369,8 +371,105 @@ main{
   .circle-button:active {
     transform: scale(0.95);
   }
+  
+  header {
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 1000;
+    background-color: #222;
+    color: white;
+    padding: 16px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
+  header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-family: "UnboundedBold";
+  }
+
+  .menu-btn {
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  /* Сайдбар */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: -360px;
+    width: 300px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    padding: 24px;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.3);
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    right: 0;
+  }
+
+  .sidebar .close-btn {
+    font-size: 24px;
+    cursor: pointer;
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+.line{
+    font-family: "Unbounded";
+    font-size: 25px;
+}
+
+  .sidebar a {
+    margin-top: 50px;
+    font-family: "Unbounded";
+    font-size: 22px;
+    color: white;
+    display: block;
+    color: white;
+    text-decoration: underline;
+    padding: 10px 0;
+  }
+
+  /* Затемнение фона */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 900;
+  }
+
+  .overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  @media (min-width: 1024px){
+    .main-img-wrapper{
+        margin-top: 0px;
+    }
+    header{
+        display: none;
+    }
+  }
 @media (min-width: 660px) and (max-width: 1024px) {
+
     .flexbox-wrapper{
         display: none;
     }
