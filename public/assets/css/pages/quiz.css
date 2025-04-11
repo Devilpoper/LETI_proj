@@ -16,19 +16,22 @@
   font-style: normal;
 }
 
-/* Фон, который занимает всю высоту экрана */
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
-  /* Допустим, возьмём светло-бежевый оттенок, близкий к референсу */
+  min-height: 100vh;
+  /* Можно оставить background или другие свойства */
   background-color: #e8e3c5;
   font-family: 'Arial', sans-serif;
 }
 
 .quiz-bg {
+  min-height: 100vh;
   width: 100%;
-  height: 100%;
+  /* Делаем flex-контейнер, который всегда будет центрировать контент */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Основной контейнер викторины, чтобы она была по центру */
