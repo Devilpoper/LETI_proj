@@ -19,6 +19,7 @@
     text-align: center;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     transform: rotate(0deg);
+    color: white;
 }
 .intro__btn-text {
     opacity: 0;
@@ -31,6 +32,7 @@
     font-size: clamp(1.375rem, 2.5vw, 1.875rem);
     position: absolute;
     right: 2rem;
+    color: white;
 }
 .intro__home-page-btn:hover {
     width: clamp(3.75rem, 1000vw, 20rem);
@@ -102,6 +104,7 @@
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     z-index: 2;
+    color: white;
 }
 .navigation-bar__btn-text {
     opacity: 0;
@@ -113,6 +116,7 @@
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: absolute;
     z-index: 1;
+    color: white;
 }
 .navigation-bar__next-page-btn .navigation-bar__btn-text {
     transform: translateX(1.25rem);

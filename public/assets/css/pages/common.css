@@ -14,14 +14,14 @@ body, html {
 header.collage,
 main.page-content {
     background-color: #E7E3C4; /* Пастельный фон; можно настроить прозрачность по желанию */
-    max-width: 1500px;
+    max-width: 100rem;
     width: 100%;
     margin: 0 auto; /* Центрируем по горизонтали */
 }
 
 header.collage {
     display: grid;
-    max-width: 1500px;
+    max-width: 100rem;
     width: 100%;
     margin: 0 auto 3rem; 
     aspect-ratio: 2.5; /* Соотношение ширины к высоте 3:1 (можно подогнать) */
