@@ -2,17 +2,32 @@ body, html {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    height: 100%;
     background: #E7E3C4;
+}
+
+
+/* 
+   Задаём для контента пастельный фон — это будут и коллаж, и текст ниже.
+   Они будут центрированы с max-width и внутренними отступами для эстетики.
+*/
+header.collage,
+main.page-content {
+    background-color: #E7E3C4; /* Пастельный фон; можно настроить прозрачность по желанию */
+    max-width: 1500px;
+    width: 100%;
+    margin: 0 auto; /* Центрируем по горизонтали */
 }
 
 header.collage {
     display: grid;
-    max-width: 1200px;
+    max-width: 1500px;
     width: 100%;
-    margin: 0 auto 1.5rem;  /* Нет лишнего отступа снизу */
-    aspect-ratio: 3; /* Соотношение ширины к высоте 3:1 (можно подогнать) */
+    margin: 0 auto 3rem; 
+    aspect-ratio: 2.5; /* Соотношение ширины к высоте 3:1 (можно подогнать) */
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 1fr);
+    border-bottom-right-radius: 5px;
 }
 
 
