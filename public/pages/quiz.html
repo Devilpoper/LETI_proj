@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Викторина по истории университета</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap 5 (CDN) -->
+  <link 
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  >
+  
+  <!-- Подключаем свои стили -->
+  <link rel="stylesheet" href="../assets/css/pages/quiz.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@506&display=swap" rel="stylesheet">
+
+  <!-- Vue.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="app" class="quiz-bg d-flex justify-content-center align-items-center">
+    <!-- Заголовок и краткое описание (если нужно) -->
+    <div v-if="currentScreen === 'start'" class="quiz-container">
+      <header class="text-center mb-4">
+        <h1 class="quiz-title">История ЛЭТИ</h1>
+      </header>
+      <div class="question-card">
+        <div class="image-container">
+          <!-- Фоновое изображение для стартового экрана -->
+          <img src="../assets/img/quiz/start.jpg" alt="Стартовое изображение" class="question-image">
+          <div class="question-overlay">
+            <h2 class="question-text mb-4">Добро пожаловать в викторину по истории ЛЭТИ!</h2>
+          </div>
+        </div>
+        <div class="p-4 text-center">
+          <button class="btn btn-primary next-btn" @click="startQuiz">Начать</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Экран викторины -->
+    <div v-if="currentScreen === 'quiz'" class="quiz-container">
+      <header class="text-center mb-4">
+        <h1 class="quiz-title">История ЛЭТИ</h1>
+      </header>
+      <div class="question-card">
+        <div class="image-container">
+          <!-- Номер вопроса -->
+          <div class="question-number p-2">
+            {{ currentIndex + 1 }}/{{ quizData.length }}
+          </div>
+          <!-- Изображение вопроса -->
+          <img 
+            :src="currentQuestion.image" 
+            alt="Изображение вопроса" 
+            class="question-image"
+          >
+          <!-- Оверлей с текстом вопроса (поверх изображения, всегда виден) -->
+          <div class="question-overlay" :class="{ 'active': showAnswer }">
+            <h2 class="question-text mb-4">{{ currentQuestion.text }}</h2>
+          </div>
+          <!-- Пояснение, всплывающее снизу -->
+          <div 
+            class="explanation-overlay"
+            :class="{ 'active': showAnswer }"
+          >
+            <p class="explanation-text mb-0">{{ currentQuestion.explanation }}</p>
+          </div>
+        </div>
+        <div class="p-4">
+          <!-- Варианты ответов -->
+          <div class="row g-3">
+            <div 
+              class="col-12 col-md-6"
+              v-for="(answer, index) in currentQuestion.answers" 
+              :key="index"
+            >
+              <button 
+                class="btn w-100 answer-btn"
+                :class="{
+                  'btn-success': showAnswer && answer.isCorrect,
+                  'btn-danger': showAnswer && selectedAnswer === index && !answer.isCorrect,
+                  'btn-answer': !showAnswer,
+                  'btn-other': showAnswer && selectedAnswer !== index
+                }"
+                @click="selectAnswer(index)"
+                :disabled="showAnswer"
+              >
+                {{ answer.text }}
+              </button>
+            </div>
+          </div>
+          <!-- Кнопка перехода к следующему вопросу -->
+          <div class="mt-4 text-end">
+            <button 
+              class="btn btn-primary next-btn"
+              :disabled="!showAnswer"
+              @click="nextQuestion"
+            >
+              Следующий вопрос
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Финальный экран -->
+    <div v-if="currentScreen === 'end'" class="quiz-container">
+      <header class="text-center mb-4">
+        <h1 class="quiz-title">История ЛЭТИ</h1>
+      </header>
+      <div class="question-card">
+        <div class="image-container">
+          <!-- Фоновое изображение для финального экрана -->
+          <img src="../assets/img/quiz/end.jpg" alt="Финальное изображение" class="question-image">
+          <div class="question-overlay">
+            <h2 class="question-text mb-4">
+              Итоговый счёт: {{ score }} / {{ quizData.length }}
+            </h2>
+            <p class="explanation-text">
+              {{ finalMessage }}
+            </p>
+          </div>
+        </div>
+        <div class="p-4 text-center">
+          <button class="btn btn-primary next-btn" @click="restartQuiz">Вернуться на главную</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+   <!-- Vue.js логика -->
+   <script>
+    new Vue({
+      el: '#app',
+      data: {
+        currentScreen: 'start', // 'start', 'quiz' или 'end'
+        currentIndex: 0,
+        showAnswer: false,
+        selectedAnswer: null,
+        score: 0,
+        quizData: [] // вопросы будут загружены с сервера
+      },
+      computed: {
+        currentQuestion() {
+          return this.quizData.length > 0 ? this.quizData[this.currentIndex] : null;
+        },
+        finalMessage() {
+          const ratio = this.score / this.quizData.length;
+          if (ratio === 1) {
+            return "Отлично! Вы настоящий знаток истории ЛЭТИ!";
+          } else if (ratio >= 0.5) {
+            return "Хороший результат, но есть над чем поработать.";
+          } else {
+            return "Не расстраивайтесь, попробуйте ещё раз!";
+          }
+        }
+      },
+      methods: {
+        startQuiz() {
+          // Сбрасываем данные на случай повторного прохождения
+          this.currentScreen = 'quiz';
+          this.currentIndex = 0;
+          this.score = 0;
+          this.showAnswer = false;
+          this.selectedAnswer = null;
+        },
+        selectAnswer(index) {
+          if (this.showAnswer) return;
+          this.selectedAnswer = index;
+          this.showAnswer = true;
+          if (this.currentQuestion.answers[index].isCorrect) {
+            this.score++;
+          }
+        },
+        nextQuestion() {
+          if (this.currentIndex < this.quizData.length - 1) {
+            this.currentIndex++;
+            this.showAnswer = false;
+            this.selectedAnswer = null;
+          } else {
+            this.currentScreen = 'end';
+          }
+        },
+        restartQuiz() {
+          this.currentScreen = 'start';
+        }
+      },
+      created() {
+        axios.get('/api/quiz')
+        .then(response => {
+          console.log('Вопросы получены:', response.data);
+          this.quizData = response.data;
+        })
+        .catch(error => {
+        console.error('Ошибка загрузки викторины:', error);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
