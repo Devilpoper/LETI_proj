@@ -56,7 +56,7 @@ header.collage * {
     bottom: 0;
     left: 0;
     right: 0;
-    height: clamp(2.5rem, 7vw, 8rem); /* можно подрегулировать верхний предел */
+    /*height: clamp(2.5rem, 7vw, 10rem); /* можно подрегулировать верхний предел */
     padding: 0.3rem;
     display: flex;
     background-color: rgba(0, 0, 0, 0.7);
@@ -66,7 +66,10 @@ header.collage * {
     transform: translateY(100%);
     transition: all 0.5s ease;
     pointer-events: none;
-    overflow: visible;
+    overflow: hidden;
+    min-height: 7rem;
+    max-height: 100%;
+    height: auto;
 }
 
 .overlay__text {
@@ -75,7 +78,8 @@ header.collage * {
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 0.2rem 1rem;
+    max-height: 100%;
+    padding: 0.2rem 0.5rem;
     font-family: 'Unbounded', sans-serif;
 }
 
@@ -85,6 +89,7 @@ header.collage * {
     max-width: 90%;
     word-break: break-word;
     margin-bottom: 0.3rem;
+    max-height: 100%;
 }
 
 .overlay__description {
@@ -92,6 +97,7 @@ header.collage * {
     line-height: 1.3;
     max-width: 90%;
     word-break: break-word;
+    max-height: 100%;
 }
 
 
