@@ -21,3 +21,10 @@
       node server.hs
       ```
       Сервер должен запуститься на порту localhost:3000
+
+## Developers
+
+  - [Romanov Aleksandr](https://github.com/alexanderromanoff)
+  - [Boitsov Vladislav](https://github.com/VBStudi0s)
+  - [Maltsev Kirill](https://github.com/KirillMaltsev3341)
+  - [Ryabov	Mikhail](https://github.com/Devilpoper)
