@@ -26,5 +26,5 @@
 
   - [Romanov Aleksandr](https://github.com/alexanderromanoff)
   - [Boitsov Vladislav](https://github.com/VBStudi0s)
-  - [Maltsev Kirill](https://github.com/KirillMaltsev3341)
+  - [Maltsev Kirill](https://github.com/drimmovka)
   - [Ryabov	Mikhail](https://github.com/Devilpoper)
